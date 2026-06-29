@@ -42,9 +42,7 @@ struct ContentView: View {
             case .transactions:
                 TransactionsView()
             case .taxSimulator:
-                Text("Tax Simulator (Coming Soon)")
-                    .font(.title)
-                    .foregroundStyle(.secondary)
+                TaxSimulatorView()
             case nil:
                 Text("Select an item from the sidebar")
                     .foregroundStyle(.secondary)
