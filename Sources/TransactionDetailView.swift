@@ -79,8 +79,10 @@ struct TransactionDetailView: View {
                             .font(.subheadline)
                             .fontWeight(.semibold)
 
-                            Text("Sold: \(batch.sharesSold, specifier: "%.0f")")
-                                .font(.caption)
+                            Text(
+                                "Sold: \(batch.sharesSold, specifier: "%.0f") @ \(batch.originalBuyPricePerShare, specifier: "%.2f") €"
+                            )
+                            .font(.caption)
 
                             Text("Method: \(batch.bestMethod)")
                                 .font(.caption)

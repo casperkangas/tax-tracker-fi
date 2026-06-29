@@ -4,6 +4,7 @@ import Foundation
 struct TaxOptimizationResult {
     let originalBuyDate: Date
     let sharesSold: Double
+    let originalBuyPricePerShare: Double
     let bestMethod: String
     let taxableProfit: Double
 }
@@ -143,6 +144,7 @@ class TaxCalculator {
                 TaxOptimizationResult(
                     originalBuyDate: lot.originalBuyDate,
                     sharesSold: sharesFromThisLot,
+                    originalBuyPricePerShare: lot.buyPricePerShare,
                     bestMethod: chosenMethod,
                     taxableProfit: bestProfit
                 ))
