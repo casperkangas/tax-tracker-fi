@@ -15,27 +15,30 @@ struct TransactionsView: View {
         NavigationStack {
             List {
                 ForEach(transactions) { transaction in
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(transaction.assetName)
-                                .font(.headline)
-                            Spacer()
-                            Text(transaction.type.rawValue)
-                                .foregroundStyle(transaction.type == .buy ? .green : .red)
-                                .fontWeight(.bold)
+                    // Wrap the row in a NavigationLink
+                    NavigationLink(destination: TransactionDetailView(transaction: transaction)) {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(transaction.assetName)
+                                    .font(.headline)
+                                Spacer()
+                                Text(transaction.type.rawValue)
+                                    .foregroundStyle(transaction.type == .buy ? .green : .red)
+                                    .fontWeight(.bold)
+                            }
+
+                            Text(
+                                "\(transaction.quantity, specifier: "%.0f") shares @ \(transaction.pricePerShare, specifier: "%.2f") €"
+                            )
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+
+                            Text(transaction.date, format: .dateTime.year().month().day())
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
                         }
-
-                        Text(
-                            "\(transaction.quantity, specifier: "%.0f") shares @ \(transaction.pricePerShare, specifier: "%.2f") €"
-                        )
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-
-                        Text(transaction.date, format: .dateTime.year().month().day())
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
+                        .padding(.vertical, 4)
                     }
-                    .padding(.vertical, 4)
                 }
                 .onDelete(perform: deleteTransactions)
             }
